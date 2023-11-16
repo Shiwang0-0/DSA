@@ -1,2 +1,2 @@
 # COMPETITIVE_PROGRAMMING
-Codes of different languages i solved while practicing.
+Codes in different languages which I have solved (either by my own or by taking references).
