@@ -49,6 +49,11 @@ public:
 
 APROACH 2: EXPONENTS O(logn)
 
+LOGIC:
+x^n=somthing
+n log(x)=log something
+ans=log something
+something=e power ans
 
 class Solution {
 public:
