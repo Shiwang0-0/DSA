@@ -1,4 +1,7 @@
 /*
+
+APPROACH: 1  BINARY EXPONENTIATION O(logn)
+
 class Solution {
 public:
 
@@ -42,4 +45,34 @@ public:
 
     }
 };
+
+
+APROACH 2: EXPONENTS O(logn)
+
+
+class Solution {
+public:
+    double myPow(double x, int n) {
+        if(x==1)
+        {
+            return 1;
+        }
+        if(n==1)
+            return x;
+
+        double ans=n*log(x);
+        if(x<0){
+            if(n%2 ==0){
+                return exp(n*(log(-x)));
+            }
+            else
+                return -exp(n*(log(-x)));
+        }
+
+        return exp(ans);
+
+    }
+};
+
+
 */
