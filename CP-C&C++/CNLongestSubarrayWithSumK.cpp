@@ -1,3 +1,7 @@
+
+
+// MOST OPTIMAL FOR +VE AND -VE INCLUDED
+
 /*AVG T.C: O(NlogN)   S.C: O(N)
 NOTE: if considering unordered_map it is possible to attain O(N) if collisions are less
 and also possible to have O(N^2) if more collisions are present.
@@ -38,6 +42,42 @@ int getLongestSubarray(vector<int>& a, int k){
         }
     }
 
+    return len; 
+}
+*/
+
+
+
+// MOST OPTIMAL FOR +VE ONLY
+// two pointer
+
+// T.C: O(2N)  S.C: O(1)
+
+/*
+#include <vector>
+#include<math.h>
+int longestSubarrayWithSumK(vector<int> a, long long k) {
+    int left=0,right=0;
+    int len=0;
+    int n=a.size();
+    long long sum=a[0];
+    while(right<n)
+    {
+        while(left<=right && sum>k)
+        {
+            sum-=a[left];
+            left++;
+        }
+        if(sum==k)
+        {
+            len=max(len,right-left+1);
+        }
+        
+        right++;
+        if(right<n)
+        sum=sum+a[right];
+        
+    }
     return len; 
 }
 */
