@@ -9,6 +9,9 @@
 // finally if count value is not zero, means the ele exist, return it.
 
 /*
+
+// Moore's Voting Algorithm
+
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
@@ -24,6 +27,13 @@ public:
             else
                 count--;    
         }
+        // count doesnt represents anything
+
+        // as it states that the array always have a majority element,
+        // because it may be possible that say 2 is major, but 2 is not begin repeated more than n/2 times
+        // we dont need to check wether the count > n/2 because count being !-0 justify that
+
+
         if(count)
             return ele;
         return -1;
