@@ -1,5 +1,7 @@
 /*
 
+BFS APPROACH
+
 class Graph {
 
 private:
@@ -48,4 +50,46 @@ public:
 };
 
 
+*/
+
+
+
+/*
+DFS APPROACH
+
+class Graph {
+
+private:
+    bool dfs(vector<int> adj[], int V,vector<int>&visited,pair<int,int>p) // <node,parent>
+    {
+        int node=p.first;
+        int parent=p.second;
+        visited[node]=1;
+        for(auto it:adj[node])
+        {
+            if(visited[it]!=1)
+            {
+                // visited[it]=1;  
+                if(dfs(adj,V,visited,{it,node}))  
+                    return true;
+            }
+            else if(parent!=it)
+                return true;
+                
+        }
+        return false;
+    }
+
+public:
+    bool detectCycle(int V, vector<int> adj[]) {
+        // Write your code here.
+        for(int i=0;i<V;i++)
+        {
+            vector<int>visited(V,0);
+            if(dfs(adj,V,visited,{1,-1}))
+                return true;
+        }
+        return false;
+    }
+};
 */
