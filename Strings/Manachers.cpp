@@ -1,0 +1,68 @@
+class Manacher{
+    string t;
+    vector<int> p;
+
+    int lpsStart, lpsLength;
+public:
+    Manacher(string s){
+        for(char i: s){
+            t += string("#") + i;
+        }
+        t += string("#");
+
+        build();
+    }
+
+    // p[i] = defines how many length of palindrome we have at index i.
+    // Actual length of palindrome at p[i] is p[i] - 1, as We initially assigned 1 value to every p[i], So '#' characters also got length 1, which is why we have to subtract 1.
+    void build(){
+        int n = t.size();
+        p.resize(n, 1);
+
+        int l = 1, r = 1;
+
+        for(int i = 1; i < n; i++){
+            if(l + r - i >= 0)  p[i] = max(1, min(r - i, p[l + r - i]));
+
+            while(i - p[i] >= 0 && i + p[i] < n && t[i - p[i]] == t[i + p[i]]) p[i]++;
+
+            if(i + p[i] > r){
+                l = i - p[i];
+                r = i + p[i];
+
+                if(lpsLength < p[i]){
+                    lpsStart = l + 2;
+                    lpsLength = p[i] - 1;
+                }
+            }
+        }
+    }
+
+    int getLongest(int center, bool odd){
+        int position = 2 * center + 1 + (!odd);
+        return p[position] - 1;
+    }
+
+    // (r - l + 1) is the size of the current window, if current window size comes under its center's biggest palindrome, then it means it's also palindrome, as part of palindrome is also palindrome.
+    bool checkPalindrome(int l, int r){
+        if((r - l + 1) <= getLongest((l + r)/2, (r - l + 1)%2)) return true;
+        return false;
+    } 
+
+    string longestPalindromeSubstring(){
+        int n = t.size();
+        string ans = "";
+        for(int i = lpsStart; i < n && lpsLength--; i += 2){
+            ans.push_back(t[i]);
+        }
+        return ans;
+    }
+};
+
+class Solution{
+public:
+    string longestPalindrome(string &s){
+        Manacher m(s);
+        return m.longestPalindromeSubstring();
+    }
+};
